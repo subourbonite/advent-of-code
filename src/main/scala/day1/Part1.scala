@@ -8,7 +8,10 @@ object Part1 {
       .getLines
       .map(_.toInt)
       .sliding(2, 1)
-      .count(x => x.head < x.tail.headOption.getOrElse(0))
+      .count {
+        case Seq(x, y) => x < y
+        case _         => false
+      }
 
     println(s"Input file had $numIncreases value increases")
   }

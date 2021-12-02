@@ -10,8 +10,13 @@ object Part2 {
       .sliding(3, 1)
       .map(_.sum)
       .sliding(2, 1)
-      .count(x => x.head < x.tail.headOption.getOrElse(0))
+      .count {
+        case Seq(x, y) => x < y
+        case _         => false
+      }
 
-    println(s"Input file had $numIncreases value increases using a sliding window of 3 aggregate values")
+    println(
+      s"Input file had $numIncreases value increases using a sliding window of 3 aggregate values"
+    )
   }
 }
